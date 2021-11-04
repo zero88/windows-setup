@@ -36,44 +36,35 @@
     {
         "defaults": 
         {
-            "acrylicOpacity": 0.29999999999999999,
             "backgroundImage": "https://lh3.googleusercontent.com/pw/AM-JKLUn1G-uZnUwhZt81pQcdBjnJxOO3wnBrpOfkPH0FSlb1uUYRJSlvvWgeHr9G_CzQJai7kBPMqD7tvxKX2EXiWBKtpPBLs86u4HirWkAnX2Ycmy_OKx2XlcXntcEtMbVtK8LV9kcfl0RLpcdWd9VlIOz8g=w1280-h1024-no?authuser=0",
             "backgroundImageAlignment": "center",
-            "backgroundImageOpacity": 0.29999999999999999,
+            "backgroundImageOpacity": 0.34999999999999998,
             "backgroundImageStretchMode": "uniformToFill",
+            "bellStyle": "taskbar",
             "colorScheme": "Dracula",
             "font": 
             {
-                "face": "Source Code Pro",
+                "face": "SauceCodePro Nerd Font Mono",
                 "size": 9
             },
-            "useAcrylic": true
+            "useAcrylic": false
         },
         "list": 
         [
             {
+                "closeOnExit": "always",
                 "guid": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
                 "hidden": false,
                 "name": "PowerShell",
                 "source": "Windows.Terminal.PowershellCore",
-                "useAcrylic": true
+                "startingDirectory": "%USERPROFILE%"
             },
             {
-                "guid": "{213286de-05d1-45ec-b62b-db7409610000}",
-                "icon": "https://lh3.googleusercontent.com/pw/AM-JKLV0o_1Aa8nEwe7cVJ0N94KjYYTrxMJWqfi-1FBmvAoWATHvKehqPJlEJ0gvwbhPGwBhDUICju8GHdCcm284H3rk5OOnBS6aqPere_xtsByBUOrwV6Snj9KeZvZzfke_OsMuBxm2cxxaTujNLBJP80q70w=s512-no?authuser=0",
-                "name": "ssh"
-            },
-            {
-                "guid": "{2c4de342-38b7-51cf-b940-2309a097f518}",
-                "hidden": false,
-                "name": "Ubuntu",
-                "source": "Windows.Terminal.Wsl"
-            },
-            {
-                "commandline": "powershell.exe",
-                "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
-                "hidden": false,
-                "name": "Windows PowerShell"
+                "commandline": "powershell \"Start-Process -Verb RunAs cmd.exe '/c start wt.exe'\"",
+                "guid": "{cc1d5ab5-08de-49e1-9a94-e96866ecbd1c}",
+                "icon": "ms-appx:///ProfileIcons/pwsh.png",
+                "name": "PowerShell Admin",
+                "startingDirectory": "%USERPROFILE%"
             },
             {
                 "commandline": "cmd.exe",
@@ -86,6 +77,27 @@
                 "hidden": false,
                 "name": "Azure Cloud Shell",
                 "source": "Windows.Terminal.Azure"
+            },
+            {
+                "commandline": "ssh zdt",
+                "guid": "{9ca0bbc2-6f78-45b6-9afc-4024c731dc69}",
+                "icon": "https://lh3.googleusercontent.com/pw/AM-JKLUwg5XUydvPOqBhUsFh4BPkR1WrDqrfpNJ51G5-bTFlHXwIppWqaLiMULLYpQlr7Wm-RF0tpwA4zwcFNvUQVku7Q2uyBgUHUUcoduaGVySMUJ6S5WA4MltUuzB-zWVD67uf6UZAd2RorcfUOs9QiN6Z_A=s512-no?authuser=0",
+                "name": "Debian",
+                "startingDirectory": "%USERPROFILE%",
+                "suppressApplicationTitle": true
+            },
+            {
+                "guid": "{2c4de342-38b7-51cf-b940-2309a097f518}",
+                "hidden": false,
+                "name": "Ubuntu",
+                "source": "Windows.Terminal.Wsl"
+            },
+            {
+                "commandline": "vagrant reload",
+                "guid": "{213286de-05d1-45ec-b62b-db7409610000}",
+                "icon": "https://lh3.googleusercontent.com/pw/AM-JKLVwWBHcYNeB6L2RvSilNLUuNPPwBScJPKkJjNVH7VVenM02IpG47yb1d0LZ1kAit3b54ZFpzrM8lA4XihiI4s-QcisdAyOtZZUTyxtjlHlSsIXh2x8snID11OxBlSB8PLKlk72VLC9Kr-SjL_QiZxRahQ=s512-no?authuser=0",
+                "name": "Vagrant zdt",
+                "startingDirectory": "C:\\Users\\son.tran\\projects\\vagrant\\dev"
             }
         ]
     },
@@ -394,5 +406,6 @@
     "showTabsInTitlebar": true,
     "startOnUserLogin": true,
     "tabSwitcherMode": "mru",
-    "theme": "system"
+    "theme": "system",
+    "windowingBehavior": "useExisting"
 }
