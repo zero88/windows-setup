@@ -45,7 +45,8 @@
             "font": 
             {
                 "face": "SauceCodePro Nerd Font Mono",
-                "size": 9
+                "size": 9,
+                "weight": "medium"
             },
             "useAcrylic": false
         },

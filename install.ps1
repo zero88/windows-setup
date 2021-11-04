@@ -15,12 +15,15 @@ choco install -y `
     kubernetes-cli kubernetes-helm k9s `
     openjdk8 openjdk11 gralde maven `
     nodejs-lts yarn python `
-    vagrant virtualbox rsync `
+    vagrant virtualbox rsync
+
+mkdir ~/projects
 
 ## Install fonts
-Set-Location ~/
+Set-Location ~/projects
 git clone --filter=blob:none --depth 1 --sparse git@github.com:ryanoasis/nerd-fonts
-Set-Location ~/nerd-fonts
+Set-Location ./nerd-fonts
+git sparse-checkout add patched-fonts/Hack
 git sparse-checkout add patched-fonts/FiraCode
 git sparse-checkout add patched-fonts/SourceCodePro
 ./install.ps1 FiraCode, SourceCodePro, Hack
