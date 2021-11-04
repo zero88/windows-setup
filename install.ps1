@@ -42,7 +42,7 @@ if (-not $(Test-Path $PROFILE)) {
 curl https://raw.githubusercontent.com/zero88/windows-setup/main/profile.ps1 | Set-Content -Path $PROFILE
 
 #### Terminal setting
-$sf = "$env:LOCALAPPDATA/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState"
+$sf = "$env:LOCALAPPDATA/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/settings.json"
 if (-not $(Test-Path $sf)) {
     New-Item -Path $sf -ItemType file –Force
 }
