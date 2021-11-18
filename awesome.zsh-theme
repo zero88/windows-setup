@@ -13,15 +13,19 @@
 if [[ $TERM = (*256color|*rxvt*) ]]; then
   turquoise="%{${(%):-"%F{81}"}%}"
   orange="%{${(%):-"%F{166}"}%}"
+  yellow="%{${(%):-"%F{011}"}%}"
   purple="%{${(%):-"%F{135}"}%}"
-  hotpink="%{${(%):-"%F{161}"}%}"
+  hotpink="%{${(%):-"%F{124}"}%}"
   limegreen="%{${(%):-"%F{118}"}%}"
+  emerald="%{${(%):-"%F{028}"}%}"
 else
   turquoise="%{${(%):-"%F{cyan}"}%}"
   orange="%{${(%):-"%F{yellow}"}%}"
+  yellow="%{${(%):-"%F{yellow}"}%}"
   purple="%{${(%):-"%F{magenta}"}%}"
   hotpink="%{${(%):-"%F{red}"}%}"
   limegreen="%{${(%):-"%F{green}"}%}"
+  emerald="%{${(%):-"%F{green}"}%}"
 fi
 
 autoload -Uz vcs_info
@@ -39,11 +43,18 @@ zstyle ':vcs_info:*:prompt:*' check-for-changes true
 # %a - action (e.g. rebase-i)
 # %R - repository path
 # %S - path in the repository
+function vcs_status {
+  echo "${turquoise}(%b$1${turquoise})"
+}
+
+# stagedstr-unstagedstr-untrack
+FMT_STATUS="%c%u"
 PR_RST="%{${reset_color}%}"
-FMT_BRANCH=" ${turquoise}(%b%u%c)${PR_RST}"
+FMT_BRANCH=$(vcs_status ${FMT_STATUS})${PR_RST}
 FMT_ACTION=" performing a ${limegreen}%a${PR_RST}"
-FMT_UNSTAGED="${orange} ●"
-FMT_STAGED="${limegreen} ●"
+FMT_STAGED=" ${limegreen}●${PR_RST}"
+FMT_UNSTAGED="${yellow}●${PR_RST}"
+FMT_UNTRACK="${hotpink}●${PR_RST}"
 
 zstyle ':vcs_info:*:prompt:*' unstagedstr   "${FMT_UNSTAGED}"
 zstyle ':vcs_info:*:prompt:*' stagedstr     "${FMT_STAGED}"
@@ -68,9 +79,9 @@ function steeef_precmd {
   # check for untracked files or updated submodules, since vcs_info doesn't
   if [[ -n "$(git ls-files --other --exclude-standard 2>/dev/null)" ]]; then
     PR_GIT_UPDATE=1
-    FMT_BRANCH="${PM_RST} ${turquoise}(%b%u)%c${hotpink}●${PR_RST}"
+    FMT_BRANCH="${PM_RST}$(vcs_status "${FMT_STATUS}${FMT_UNTRACK}")${PR_RST}"
   else
-    FMT_BRANCH="${PM_RST} ${turquoise}(%b%u)%c${PR_RST}"
+    FMT_BRANCH="${PM_RST}$(vcs_status "${FMT_STATUS}")${PR_RST}"
   fi
   zstyle ':vcs_info:*:prompt:*' formats       "${FMT_BRANCH}"
 
@@ -86,10 +97,9 @@ add-zsh-hook chpwd steeef_chpwd
 add-zsh-hook precmd steeef_precmd
 add-zsh-hook preexec steeef_preexec
 
-# ruby prompt settings
-ZSH_THEME_RUBY_PROMPT_PREFIX="with%F{red} "
-ZSH_THEME_RUBY_PROMPT_SUFFIX="%{$reset_color%}"
-ZSH_THEME_RVM_PROMPT_OPTIONS="v g"
-
 setopt prompt_subst
-PROMPT="${purple}%n%{$reset_color%}:${limegreen}%B%c/%b%{$reset_color%}\$(ruby_prompt_info)\$vcs_info_msg_0_${orange} λ%{$reset_color%} "
+_USER="%B${emerald}%n%{$PR_RST%}"
+_DIR="${orange}%c/%b%{$PR_RST%}"
+_STATUS="\$vcs_info_msg_0_"
+_HALFLIFE="${orange}λ%{$PR_RST%}"
+PROMPT="$_USER:$_DIR $_STATUS $_HALFLIFE "
